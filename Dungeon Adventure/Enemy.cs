@@ -21,11 +21,10 @@ namespace Dungeon_Adventure
             public bool IsEquipped { get; set; }
             public static int ItemCnt = 0;
 
-            public Monster(string itemName, string description, int type, int atk, int def, int hp, int mp)
+            public Monster(string monstername, string description, int atk, int def, int hp, int mp)
             {
-                MonsterName = itemName;
+                MonsterName = monstername;
                 Description = description;
-                Type = type;
                 Atk = atk;
                 Def = def;
                 Hp = hp;
