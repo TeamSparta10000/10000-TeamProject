@@ -91,7 +91,7 @@ namespace Dungeon_Adventure
             Console.WriteLine();
             Console.WriteLine("[아이템 목록]");
             Console.WriteLine();
-            for (int i = 0; i < GameData.Item.ItemCnt; i++)
+            for (int i = 0; i < Item.ItemCnt; i++)
             {
                 GameData.items[i].PrintItemDescription();
             }
@@ -118,13 +118,13 @@ namespace Dungeon_Adventure
             Console.WriteLine("보유중인 아이템을 장착하거나 해제할수 있습니다.");
             Console.WriteLine();
             Console.WriteLine("[아이템 목록]");
-            for (int i = 0; i < GameData.Item.ItemCnt; i++)
+            for (int i = 0; i < Item.ItemCnt; i++)
             {
                 GameData.items[i].PrintItemDescription(true, i + 1);
             }
             Console.WriteLine();
             Console.WriteLine("0.나가기");
-            int keyinput = Program.CheckValidInput(0, GameData.Item.ItemCnt);
+            int keyinput = Program.CheckValidInput(0, Item.ItemCnt);
             switch (keyinput)
             {
                 case 0:
