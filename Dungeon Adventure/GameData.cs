@@ -14,55 +14,80 @@ namespace Dungeon_Adventure
         public static Item[] items;
         public static void GameDataSetting()
         {
+            Console.Write("캐릭터 이름을 입력하세요: ");
+            string name = Console.ReadLine();
+            Console.Clear();
+            static Character ChooseClass()
+            {
+                Job choice = Job.None;
+                while (true)
+                {
+                    Console.WriteLine("1.Knight(기사) 초기 스탯-Atk:10,Def:20,Hp:200,Mp:50,Gold:3000 ");
+                    Console.WriteLine("2.Mage(마법사) 초기 스탯-Atk:20,Def:5,Hp:50,Mp:200,Gold:5000 ");
+                    Console.WriteLine("3.Archer(궁수) 초기 스탯-Atk:15,Def:15,Hp:150,Mp:100,Gold:2000 ");
+                    Console.Write("직업을 선택하세요: ");
 
-            player = new Character("Frost", "마법사", 1, 20, 5, 50, 200, 5000);
-            items = new Item[10];
-            AddItem(new Item("초급 마법사의 로브", "마법학교에서 지급하는 로브다.", 0, 0, 5, 0, 50));
-            AddItem(new Item("초급 마법사의 스태프", "마법학교에서 지급하는 스태프다.", 1, 10, 0, 0, 50));
-
-
-        }
-        public static void AddItem(Item item)
-        {
-            if (Item.ItemCnt == 10) return;
-            items[Item.ItemCnt] = item;
-            Item.ItemCnt++;
-        }
-        public static int GetSumBonusAtk()
-        {
-            int sum = 0;
-            for (int i = 0; i < Item.ItemCnt; i++)
-            {
-                if (GameData.items[i].IsEquipped) sum += GameData.items[i].Atk;
+                    string input = Console.ReadLine();
+                    switch (input)
+                    {
+                        case "1":
+                            choice = Character.Knight;
+                            break;
+                        case "2":
+                            choice = Character.Archer;
+                            break;
+                        case "3":
+                            choice = Character.Mage;
+                            break;
+                    }
+                    if (choice != Character.None)
+                        break;
+                }
+                return choice;
+                Console.Clear();
             }
-            return sum;
-        }
-        public static int GetSumBonusDef()
-        {
-            int sum = 0;
-            for (int i = 0; i < Item.ItemCnt; i++)
+            public static void AddItem(Item item)
             {
-                if (GameData.items[i].IsEquipped) sum += GameData.items[i].Def;
+                if (Item.ItemCnt == 10) return;
+                items[Item.ItemCnt] = item;
+                Item.ItemCnt++;
             }
-            return sum;
-        }
-        public static int GetSumBonusHp()
-        {
-            int sum = 0;
-            for (int i = 0; i < Item.ItemCnt; i++)
+            public static int GetSumBonusAtk()
             {
-                if (GameData.items[i].IsEquipped) sum += GameData.items[i].Hp;
+                int sum = 0;
+                for (int i = 0; i < Item.ItemCnt; i++)
+                {
+                    if (GameData.items[i].IsEquipped) sum += GameData.items[i].Atk;
+                }
+                return sum;
             }
-            return sum;
-        }
-        public static int GetSumBonusMp()
-        {
-            int sum = 0;
-            for (int i = 0; i < Item.ItemCnt; i++)
+            public static int GetSumBonusDef()
             {
-                if (GameData.items[i].IsEquipped) sum += GameData.items[i].Mp;
+                int sum = 0;
+                for (int i = 0; i < Item.ItemCnt; i++)
+                {
+                    if (GameData.items[i].IsEquipped) sum += GameData.items[i].Def;
+                }
+                return sum;
             }
-            return sum;
+            public static int GetSumBonusHp()
+            {
+                int sum = 0;
+                for (int i = 0; i < Item.ItemCnt; i++)
+                {
+                    if (GameData.items[i].IsEquipped) sum += GameData.items[i].Hp;
+                }
+                return sum;
+            }
+            public static int GetSumBonusMp()
+            {
+                int sum = 0;
+                for (int i = 0; i < Item.ItemCnt; i++)
+                {
+                    if (GameData.items[i].IsEquipped) sum += GameData.items[i].Mp;
+                }
+                return sum;
+            }
         }
-    }
+    } 
 }
