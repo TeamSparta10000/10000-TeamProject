@@ -8,7 +8,7 @@ using Dungeon_Adventure;
 
 namespace Dungeon_Adventure
 {
-    internal class Scene
+    public class Scene
     {
         public static void DisplayGameStart()
         {
