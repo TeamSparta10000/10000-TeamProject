@@ -44,7 +44,7 @@ namespace Dungeon_Adventure
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("E");
                 Console.ResetColor();
-                Console.Write("]");
+                Console.Write("]");                
             }
             Console.Write(ItemName);
             Console.Write("|");

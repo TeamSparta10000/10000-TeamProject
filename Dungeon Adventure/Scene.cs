@@ -36,10 +36,11 @@ namespace Dungeon_Adventure
             Console.WriteLine();
             Console.WriteLine("1. 상태보기");
             Console.WriteLine("2. 인벤토리");
+            Console.WriteLine("3. 전투시작");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-            int input = Program.CheckValidInput(1, 2);
+            int input = Program.CheckValidInput(1, 3);
             switch (input)
             {
                 case 1:
@@ -48,6 +49,9 @@ namespace Dungeon_Adventure
 
                 case 2:
                     DisplayInventory();
+                    break;
+                case 3:
+                    BattleScene();
                     break;
             }
         }
@@ -71,6 +75,9 @@ namespace Dungeon_Adventure
             Program.PrintTextWithHighlights($"Hp :", (GameData.player.Hp + bonusHp).ToString(), bonusHp > 0 ? string.Format("(+{0})", bonusHp) : "");
             Program.PrintTextWithHighlights($"Mp :", (GameData.player.Mp + bonusMp).ToString(), bonusMp > 0 ? string.Format("(+{0})", bonusMp) : "");
             Console.WriteLine($"Gold : {GameData.player.Gold} G");
+            
+            Console.WriteLine(GameData.PlayerAtkDamage());            
+
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
 
@@ -135,6 +142,83 @@ namespace Dungeon_Adventure
                     EquipMenu();
                     break;
             }
+        }
+        public static void BattleScene()
+        {            
+            Console.Clear();
+
+            for (int i = 0; i < Monster.MonsterCnt; i++)
+            {                
+                GameData.monsters[i].PrintMonsterDescription();
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine("1. 공격 시작");
+            int keyinput = Program.CheckValidInput(0, 1);
+            switch (keyinput)
+            {
+                case 0:
+                    DisplayTown();
+                    break;
+                case 1:
+                    PlayerAtkScene();
+                    break;
+            }
+
+            //GameData.MonsterTakeDamage(GameData.PlayerAtkDamage());
+            //GameData.PlayerTakeDamage(GameData.MonsterAtkDamage());
+        }
+        public static void PlayerAtkScene()
+        {
+            Console.Clear();
+
+            for (int i = 0; i < Monster.MonsterCnt; i++)
+            {
+                GameData.monsters[i].PrintMonsterDescription(true, i + 1);
+            }
+            Console.WriteLine() ;
+            Console.WriteLine("공격할 몬스터의 번호를 선택하세요. ");
+            Console.WriteLine();
+            Console.WriteLine("0. 마을로 도망가기 ");
+            Console.WriteLine();
+            int keyinput = Program.CheckValidInput(0, Monster.MonsterCnt); // 죽어서 선택을 못하게 하려면 배열에서 삭제..? 그럼 아예 콘솔창에서 사라질텐데 어쩌지
+            switch (keyinput)
+            {
+                case 0:
+                    DisplayTown();
+                    break;
+                default:                    
+                    if (GameData.monsters[keyinput - 1].Hp <= 0)
+                    {
+                        Console.WriteLine("잘못된 선택입니다. ");
+                    }
+                    GameData.MonsterTakeDamage(GameData.PlayerAtkDamage(), keyinput - 1);
+                    break;                
+            }
+            Console.ReadKey();
+            MonsterAtkScene();
+        }
+        public static void MonsterAtkScene()
+        {
+            Console.Clear();
+
+            for (int i = 0; i < Monster.MonsterCnt; i++)
+            {
+                GameData.monsters[i].PrintMonsterDescription(true, i + 1);
+            }
+            Console.WriteLine();
+            Console.WriteLine("몬스터가 공격합니다. ");
+            Console.WriteLine();
+            for (int i = 0; i < Monster.MonsterCnt; i++)
+            {
+                if (GameData.monsters[i].Hp > 0)
+                {
+                    GameData.PlayerTakeDamage(GameData.MonsterAtkDamage(i));
+                }                
+            }            
+            Console.ReadKey();
+            PlayerAtkScene();
         }
     }
 }
