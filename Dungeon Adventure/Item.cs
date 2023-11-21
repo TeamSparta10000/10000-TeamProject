@@ -38,13 +38,15 @@ namespace Dungeon_Adventure
                 Console.Write("{0}", idx);
                 Console.ResetColor();
             }
-            if (IsEquipped)
+            if (IsEquipped) // 여기에 실제로 플레이서 스탯에 아이템 스텟을 더해줘야겠는데. . . player.Atk + items.Atk ? 혹은 GamaData.BonusStat 여기에?
             {
                 Console.Write("[");
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("E");
                 Console.ResetColor();
                 Console.Write("]");
+
+                // GameData.player.Atk += GameData.items[1].Atk;
             }
             Console.Write(ItemName);
             Console.Write("|");

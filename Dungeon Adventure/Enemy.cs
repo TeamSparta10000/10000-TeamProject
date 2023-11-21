@@ -10,31 +10,49 @@ namespace Dungeon_Adventure
 {
     public class Monster
     {
-            public string MonsterName { get; }
-            public string Description { get; }
-            public int Atk { get; set; }
-            public int Def { get; set; }
-            public int Hp { get; set; }
-            public int Mp { get; set; }
+        public string MonsterName { get; }
+        public string Description { get; }
+        public int Atk { get; set; }
+        public int Def { get; set; }
+        public int Hp { get; set; }
+        public int Mp { get; set; }
+        public static int MonsterCnt = 0;
+        public bool IsDead { get; set; }
 
-            public bool IsDead => Hp <= 0;
-
-            public Monster(string monstername, string description, int atk, int def, int hp, int mp)
+        public Monster(string monstername, string description, int atk, int def, int hp, int mp, bool isDead = false)
+        {
+            MonsterName = monstername;
+            Description = description;
+            Atk = atk;
+            Def = def;
+            Hp = hp;
+            Mp = mp;
+            IsDead = isDead;
+        }        
+        public void PrintMonsterDescription(bool withNumber = false, int idx = 0)
+        {
+            Console.Write("- ");
+            if (withNumber)
             {
-                MonsterName = monstername;
-                Description = description;
-                Atk = atk;
-                Def = def;
-                Hp = hp;
-                Mp = mp;
+                Console.Write("{0}. ", idx);
             }
-            public void TakeDamage(int damage)
+            if (IsDead)
             {
-                Hp -= damage;
-                if (IsDead) Console.WriteLine($"{MonsterName}이(가) 죽었습니다.");
-                else Console.WriteLine($"{MonsterName}이(가) {damage}의 데미지를 받았습니다. 남은 체력: {Hp}");
+                Console.Write("사망한 몬스터 입니다. " + MonsterName);
             }
+            else
+            {
+                Console.Write(MonsterName);
+            }
+            
+            
+            Console.Write(" | ");
+            Console.Write(Description );
+            Console.Write(" | ");
+            Console.Write("공격력: " + Atk + " ");
+            Console.WriteLine("체력: " + Hp);
         }
     }
+}
 
 
