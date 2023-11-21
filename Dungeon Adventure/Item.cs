@@ -31,11 +31,11 @@ namespace Dungeon_Adventure
         }
         public void PrintItemDescription(bool withNumber = false, int idx = 0)
         {
-            Console.Write("-");
+            Console.Write("- ");
             if (withNumber)
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.Write("{0}", idx);
+                Console.Write("{0}. ", idx);
                 Console.ResetColor();
             }
             if (IsEquipped)
@@ -47,14 +47,14 @@ namespace Dungeon_Adventure
                 Console.Write("]");                
             }
             Console.Write(ItemName);
-            Console.Write("|");
+            Console.Write(" | ");
 
             if (Atk != 0) Console.Write($" Atk {(Atk >= 0 ? "+" : "")}{Atk}");
             if (Def != 0) Console.Write($" Def {(Def >= 0 ? "+" : "")}{Def}");
             if (Hp != 0) Console.Write($" Hp {(Hp >= 0 ? "+" : "")}{Hp}");
             if (Mp != 0) Console.Write($" Mp {(Mp >= 0 ? "+" : "")}{Mp}");
 
-            Console.Write('|');
+            Console.Write(" | ");
 
             Console.WriteLine(Description);
 

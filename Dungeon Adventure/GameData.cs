@@ -16,7 +16,7 @@ namespace Dungeon_Adventure
         public static Item[] items;
         public static void GameDataSetting()
         {
-            player = new Character("Frost", "마법사", 1, 100, 5, 50, 200, 5000);
+            player = new Character("Frost", "마법사", 1, 20, 5, 1, 200, 5000);
             items = new Item[10];            
             AddItem(new Item("초급 마법사의 로브", "마법학교에서 지급하는 로브다.", 0, 0, 5, 0, 50));
             AddItem(new Item("초급 마법사의 스태프", "마법학교에서 지급하는 스태프다.", 1, 10, 0, 0, 50));
@@ -37,16 +37,18 @@ namespace Dungeon_Adventure
             int atkDamage = new Random().Next((int)MinDamage, (int)MaxDamage + 1);
             return atkDamage;
         }
-        public static void PlayerTakeDamage(int damage) // 이하동문
+        public static void PlayerTakeDamage(int damage, int i) // 이하동문
         {            
             player.Hp -= damage;
             if (player.Hp <= 0)
             {
+                player.Hp = 0;
+                Console.WriteLine($"{player.Name}이(가) {monsters[i].MonsterName}에게 {damage}의 데미지를 받았습니다. 남은 체력: {player.Hp}\n");                
                 Console.WriteLine($"{player.Name}이(가) 죽었습니다.");
             }
             else
             {
-                Console.WriteLine($"{player.Name}이(가) {damage}의 데미지를 받았습니다. 남은 체력: {player.Hp}");
+                Console.WriteLine($"{player.Name}이(가) {monsters[i].MonsterName}에게 {damage}의 데미지를 받았습니다. 남은 체력: {player.Hp}\n");
             }
         }
         public static int MonsterAtkDamage(int i) // 마찬가지의 이유로 GameDate.cs에 생성항. 
@@ -64,6 +66,7 @@ namespace Dungeon_Adventure
             {
                 Program.MonsterDead(i);
                 monsters[i].Hp = 0;
+                Console.WriteLine($"{monsters[i].MonsterName}이(가) {damage}의 데미지를 받았습니다. 남은 체력: {monsters[i].Hp}");                
                 Console.WriteLine($"{monsters[i].MonsterName}이(가) 죽었습니다.");
             }
             else

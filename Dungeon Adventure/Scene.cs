@@ -125,6 +125,7 @@ namespace Dungeon_Adventure
             Console.WriteLine("보유중인 아이템을 장착하거나 해제할수 있습니다.");
             Console.WriteLine();
             Console.WriteLine("[아이템 목록]");
+            Console.WriteLine();
             for (int i = 0; i < Item.ItemCnt; i++)
             {
                 GameData.items[i].PrintItemDescription(true, i + 1);
@@ -147,10 +148,22 @@ namespace Dungeon_Adventure
         {            
             Console.Clear();
 
+            int bonusAtk = GameData.GetSumBonusAtk();
+            int bonusDef = GameData.GetSumBonusDef();
+            int bonusHp = GameData.GetSumBonusHp();
+            int bonusMp = GameData.GetSumBonusMp();
+
             for (int i = 0; i < Monster.MonsterCnt; i++)
             {                
                 GameData.monsters[i].PrintMonsterDescription();
             }
+            Console.WriteLine();
+
+            Console.WriteLine($"{GameData.player.Name}({GameData.player.Job})");
+            Program.PrintTextWithHighlights($"Atk :", (GameData.player.Atk + bonusAtk).ToString(), bonusAtk > 0 ? string.Format("(+{0})", bonusAtk) : "");
+            Program.PrintTextWithHighlights($"Def :", (GameData.player.Def + bonusDef).ToString(), bonusDef > 0 ? string.Format("(+{0})", bonusDef) : "");
+            Program.PrintTextWithHighlights($"Hp :", (GameData.player.Hp + bonusHp).ToString(), bonusHp > 0 ? string.Format("(+{0})", bonusHp) : "");
+            Program.PrintTextWithHighlights($"Mp :", (GameData.player.Mp + bonusMp).ToString(), bonusMp > 0 ? string.Format("(+{0})", bonusMp) : "");
 
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
@@ -173,30 +186,50 @@ namespace Dungeon_Adventure
         {
             Console.Clear();
 
+            int bonusAtk = GameData.GetSumBonusAtk();
+            int bonusDef = GameData.GetSumBonusDef();
+            int bonusHp = GameData.GetSumBonusHp();
+            int bonusMp = GameData.GetSumBonusMp();
+
             for (int i = 0; i < Monster.MonsterCnt; i++)
             {
                 GameData.monsters[i].PrintMonsterDescription(true, i + 1);
             }
+            Console.WriteLine();
+
+            Console.WriteLine($"{GameData.player.Name}({GameData.player.Job})");
+            Program.PrintTextWithHighlights($"Atk :", (GameData.player.Atk + bonusAtk).ToString(), bonusAtk > 0 ? string.Format("(+{0})", bonusAtk) : "");
+            Program.PrintTextWithHighlights($"Def :", (GameData.player.Def + bonusDef).ToString(), bonusDef > 0 ? string.Format("(+{0})", bonusDef) : "");
+            Program.PrintTextWithHighlights($"Hp :", (GameData.player.Hp + bonusHp).ToString(), bonusHp > 0 ? string.Format("(+{0})", bonusHp) : "");
+            Program.PrintTextWithHighlights($"Mp :", (GameData.player.Mp + bonusMp).ToString(), bonusMp > 0 ? string.Format("(+{0})", bonusMp) : "");
+
             Console.WriteLine() ;
             Console.WriteLine("공격할 몬스터의 번호를 선택하세요. ");
             Console.WriteLine();
-            Console.WriteLine("0. 마을로 도망가기 ");
+            Console.WriteLine("0. 마을로 돌아가기 ");
             Console.WriteLine();
+
             int keyinput = Program.CheckValidInput(0, Monster.MonsterCnt); // 죽어서 선택을 못하게 하려면 배열에서 삭제..? 그럼 아예 콘솔창에서 사라질텐데 어쩌지
             switch (keyinput)
             {
                 case 0:
                     DisplayTown();
                     break;
-                default:                    
+                default:
+                    GameOver();
                     if (GameData.monsters[keyinput - 1].Hp <= 0)
                     {
-                        Console.WriteLine("잘못된 선택입니다. ");
+                        Console.WriteLine("잘못된 선택입니다. 아무 키를 입력하여 플레이어 공격 화면으로 돌아갑니다. ");
+                        Console.ReadKey();
+                        PlayerAtkScene();
                     }
                     GameData.MonsterTakeDamage(GameData.PlayerAtkDamage(), keyinput - 1);
                     break;                
             }
+            Console.WriteLine("\n아무 키 입력 시 다음 턴으로 넘어갑니다. ");
             Console.ReadKey();
+            GameOver();
+            
             MonsterAtkScene();
         }
         public static void MonsterAtkScene()
@@ -214,11 +247,44 @@ namespace Dungeon_Adventure
             {
                 if (GameData.monsters[i].Hp > 0)
                 {
-                    GameData.PlayerTakeDamage(GameData.MonsterAtkDamage(i));
+                    GameData.PlayerTakeDamage(GameData.MonsterAtkDamage(i), i);
+                    if (GameData.player.Hp <= 0)
+                    {
+                        Console.WriteLine("\n아무 키 입력 시 전투 결과창으로 넘어갑니다. ");
+                        Console.ReadKey();
+
+                        GameOver();
+                    }
                 }                
             }            
+
+            Console.WriteLine("\n아무 키 입력 시 다음 턴으로 넘어갑니다. ");
             Console.ReadKey();
             PlayerAtkScene();
+        }
+        public static void GameOver() // 플레이어와 몬스터의 hp를 계속 판단하여 if 플레이어가 죽었을 시 출력, else if 몬스터가 전부 죽었을 시 출력
+        {
+            if (GameData.player.Hp <= 0)
+            {
+                Console.Clear();
+                Console.WriteLine("패배하였습니다. . .\n");
+                Console.WriteLine(GameData.player.Name + "은(는) 눈 앞이 캄캄해졌다. ");
+                Console.WriteLine();
+                Console.WriteLine("\n아무 키 입력 시 마을로 돌아갑니다. ");
+                Console.ReadLine();
+                DisplayTown();
+            }
+            else if (GameData.monsters[0].Hp <= 0 && GameData.monsters[1].Hp <= 0) // 배열로 조건을 하나로 만들고 싶지만 호출 등에 문제가 있어서 코드가 길어짐, 랜덤 생성 몬스터 메서드와 겹칠 시 문제 발생 우려됨
+            {
+                Console.Clear();
+                Console.WriteLine("전투에서 승리하였습니다 ! \n");
+                Console.WriteLine("처치한 몬스터 수 " + "랜덤으로 생성한 값");
+                Console.WriteLine("\n아무 키 입력 시 마을로 돌아갑니다. ");
+                Console.WriteLine();
+                Console.ReadLine();
+                DisplayTown();
+            }
+            
         }
     }
 }
