@@ -52,6 +52,36 @@ namespace Dungeon_Adventure
             Console.Write("공격력: " + Atk + " ");
             Console.WriteLine("체력: " + Hp);
         }
+
+        static Monster[] MonsterGroup()
+        {
+            Random random = new Random();
+            int monsterNo = random.Next(1, 5);
+            Monster[] monsters = new Monster[monsterNo];              // 1~4, 랜덤 숫자만큼의 몬스터 그룹(배열) 생성
+            for (int i = 0; i < monsterNo; i++)
+            {
+                int monsterID = random.Next(1, 5);
+                switch (monsterID)
+                {
+                    case 1:
+                        monsters[i] = new Monster("A", "A", 5, 2, 100, 20);
+                        break;
+
+                    case 2:
+                        monsters[i] = new Monster("B", "B", 7, 0, 80, 30);
+                        break;
+
+                    case 3:
+                        monsters[i] = new Monster("C", "C", 3, 6, 150, 0);
+                        break;
+
+                    case 4:
+                        monsters[i] = new Monster("D", "D", 10, 0, 50, 0);
+                        break;
+                }
+            }
+            return monsters;
+        }
     }
 }
 

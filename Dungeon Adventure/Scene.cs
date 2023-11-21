@@ -146,6 +146,8 @@ namespace Dungeon_Adventure
         public static void BattleScene()
         {            
             Console.Clear();
+            Monster[] newMonsters = Enemy.MonsterGroup();
+            GameData.SetMonsters(newMonsters);
 
             for (int i = 0; i < Monster.MonsterCnt; i++)
             {                

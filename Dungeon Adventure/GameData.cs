@@ -132,5 +132,11 @@ namespace Dungeon_Adventure
             }
             return sum;
         }
+
+        public static void SetMonseters(Monster[] newMonsters)
+        {
+            monsters = newMonsters;
+            Monster.MonsterCnt = newMonsters.Length;
+        }
     }
 }
