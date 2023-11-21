@@ -27,12 +27,24 @@ namespace Dungeon_Adventure
             {
                 case 1:
                     player = new Character(name, "Knight", 1, 10, 20, 200, 50, 3000);
+                    items = new Item[10];
+                    AddItem(new Item("초급 기사의 갑옷", "기사에게 지급하는 갑옷이다.", 0, 0, 20, 100, 0));
+                    AddItem(new Item("초급 기사의 검", "기사에게 지급하는 검이다.", 1, 20, 0, 0, 0));
+                    AddItem(new Item("초급 기사의 방패", "기사에게 지급하는 방패다.", 1, 0, 20, 0, 0));
                     break;
                 case 2:
                     player = new Character(name, "Mage", 1, 20, 5, 50, 200, 5000);
+                    items = new Item[10];
+                    AddItem(new Item("초급 마법사의 로브", "마법학교에서 지급하는 로브다.", 0, 0, 5, 0, 100));
+                    AddItem(new Item("초급 마법사의 스태프", "마법학교에서 지급하는 스태프다.", 1, 20, 0, 0, 100));
+                    AddItem(new Item("초급 마법사의 오브", "마법학교에서 지급하는 오브다.", 1, 20, 0, 0, 100));
                     break;
                 case 3:
-                    player = new Character(name, "Archer", 1, 15, 15, 150, 100, 3000);
+                    player = new Character(name, "Archer", 1, 15, 15, 150, 100, 2000);
+                    items = new Item[10];
+                    AddItem(new Item("초급 궁수의 슈트", "궁수에게 지급되는 슈트다.", 0, 0, 10, 50, 0));
+                    AddItem(new Item("초급 궁수의 활", "궁수에게 지급되는 활이다.", 1, 5, 5, 0, 0));
+                    AddItem(new Item("초급 궁수의 마법화살", "궁수에게 지급되는 마법화살이다.", 1, 10, 0, 0, 50));
                     break;
             }
 
