@@ -104,12 +104,8 @@ namespace Dungeon_Adventure
             if (Monster.MonsterCnt == 10) return;
             monsters[Monster.MonsterCnt] = monster;
             Monster.MonsterCnt++;
-
-
-
-
-
         }
+
         public static void AddItem(Item item)
             {
                 if (Item.ItemCnt == 10) return;

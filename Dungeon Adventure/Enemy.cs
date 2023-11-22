@@ -28,7 +28,11 @@ namespace Dungeon_Adventure
             Hp = hp;
             Mp = mp;
             IsDead = isDead;
-        }        
+        }
+        public void AttackPlayer(Character player)
+        {
+            player.Hp -= this.Atk;
+        }
         public void PrintMonsterDescription(bool withNumber = false, int idx = 0)
         {
             Console.Write("- ");

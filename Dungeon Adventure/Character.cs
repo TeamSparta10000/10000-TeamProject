@@ -30,6 +30,10 @@ namespace Dungeon_Adventure
             Mp = mp;
             Gold = gold;
         }
+        public void AttackMonster(Monster monster)
+        {
+            monster.Hp -= this.Atk;
+        }
         public void TakeDamage(int damage)
         { 
                 Hp -= damage;
