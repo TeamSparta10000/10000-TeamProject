@@ -69,7 +69,7 @@ namespace Dungeon_Adventure
             player.Hp -= damage;
             if (player.Hp <= 0)
             {
-                Console.WriteLine($"{player.Name}이(가) 죽었습니다.");
+                Console.WriteLine($"{player.Name}이(가) {damage}의 데미지를 받았습니다. 죽었습니다.");
             }
             else
             {
@@ -91,7 +91,7 @@ namespace Dungeon_Adventure
             {
                 Program.MonsterDead(i);
                 monsters[i].Hp = 0;
-                Console.WriteLine($"{monsters[i].MonsterName}이(가) 죽었습니다.");
+                Console.WriteLine($"{monsters[i].MonsterName}이(가) {damage}의 데미지를 받았습니다. 죽었습니다.");
             }
             else
             {

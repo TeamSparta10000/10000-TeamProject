@@ -176,6 +176,8 @@ namespace Dungeon_Adventure
         {
             Console.Clear();
             Program.ShowHighlightText("Battle!");
+            Console.WriteLine("플레이어의 턴");
+
 
             for (int i = 0; i < Monster.MonsterCnt; i++)
             {
@@ -196,6 +198,7 @@ namespace Dungeon_Adventure
                     if (GameData.monsters[keyinput - 1].Hp <= 0)
                     {
                         Console.WriteLine("잘못된 선택입니다. ");
+                        Thread.Sleep(3000);
                         Console.Clear() ;
                         PlayerAtkScene();
                     }
@@ -209,6 +212,7 @@ namespace Dungeon_Adventure
         {
             Console.Clear();
             Program.ShowHighlightText("Battle!");
+            Console.WriteLine("몬스터의 턴");
 
             for (int i = 0; i < Monster.MonsterCnt; i++)
             {
@@ -222,8 +226,8 @@ namespace Dungeon_Adventure
                 if (GameData.monsters[i].Hp > 0)
                 {
                     GameData.PlayerTakeDamage(GameData.MonsterAtkDamage(i));
-                }                
-            }            
+                }
+            }
             Console.ReadKey();
             PlayerAtkScene();
         }
