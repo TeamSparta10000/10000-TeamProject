@@ -53,8 +53,10 @@ namespace Dungeon_Adventure
             Console.Write(" | ");
             Console.Write(Description );
             Console.Write(" | ");
-            Console.Write("공격력: " + Atk + " ");
-            Console.WriteLine("체력: " + Hp);
+            Console.Write("Atk: " + Atk + " ");
+            Console.Write("Def: " + Def + " ");
+            Console.Write("Hp: " + Hp + " ");
+            Console.WriteLine("Mp: " + Mp);
         }
     }
 }

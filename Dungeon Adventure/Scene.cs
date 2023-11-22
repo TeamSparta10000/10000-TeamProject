@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -147,6 +148,7 @@ namespace Dungeon_Adventure
         public static void BattleScene()
         {            
             Console.Clear();
+            Program.ShowHighlightText("Battle!");
 
             for (int i = 0; i < Monster.MonsterCnt; i++)
             {                
@@ -193,6 +195,8 @@ namespace Dungeon_Adventure
                     if (GameData.monsters[keyinput - 1].Hp <= 0)
                     {
                         Console.WriteLine("잘못된 선택입니다. ");
+                        Console.Clear() ;
+                        PlayerAtkScene();
                     }
                     GameData.MonsterTakeDamage(GameData.PlayerAtkDamage(), keyinput - 1);
                     break;                
