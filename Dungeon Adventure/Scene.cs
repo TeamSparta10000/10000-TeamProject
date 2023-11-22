@@ -203,7 +203,11 @@ namespace Dungeon_Adventure
         public static int MonsterAtkDamage(int i) // 마찬가지의 이유로 GameDate.cs에 생성항. 
         {
             double MinDamage = monsterList[i].Atk - Math.Ceiling((double)monsterList[i].Atk / 10);
+<<<<<<< Updated upstream
             double MaxDamage = monsterList[i].Atk + Math.Ceiling((double)GameData.monsters[i].Atk / 10);
+=======
+            double MaxDamage = monsterList[i].Atk + Math.Ceiling((double)monsterList[i].Atk / 10);
+>>>>>>> Stashed changes
             int atkDamage = new Random().Next((int)MinDamage, (int)MaxDamage + 1);
             return atkDamage;
         }
@@ -315,8 +319,11 @@ namespace Dungeon_Adventure
         }
         public static void MonsterAtkScene()
         {
-            Console.Clear();
+            Console.Clear();            
 
+            RandomMonsterCount(true);
+
+<<<<<<< Updated upstream
             RandomMonsterCount(true);
 
 
@@ -324,6 +331,18 @@ namespace Dungeon_Adventure
             Console.WriteLine("몬스터가 공격합니다. ");
             Console.WriteLine();
             
+=======
+            Console.WriteLine();
+            Console.WriteLine("몬스터가 공격합니다. ");
+            Console.WriteLine();
+
+            int idx = 0;
+
+            for (int i = 0; i < monsterCnt; i++)
+            {
+                PlayerTakeDamage(MonsterAtkDamage(i), i);
+            }
+>>>>>>> Stashed changes
 
             Console.WriteLine("\n아무 키 입력 시 다음 턴으로 넘어갑니다. ");
             Console.ReadKey();
