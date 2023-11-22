@@ -7,7 +7,7 @@ namespace Dungeon_Adventure
         {
             GameData.GameDataSetting();
             Scene.DisplayGameStart();
-            Scene.DisplayTown();
+            Scene.DisplayTown1();
         }
 
         public static void ToggleEqupStatus(int idx)
