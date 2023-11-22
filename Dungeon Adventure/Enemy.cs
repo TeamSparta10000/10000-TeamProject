@@ -8,7 +8,7 @@ using Dungeon_Adventure;
 
 namespace Dungeon_Adventure
 {
-    public class Monster
+    public class Monster : ICloneable
     {
         public string MonsterName { get; }
         public string Description { get; }
@@ -52,7 +52,12 @@ namespace Dungeon_Adventure
             Console.Write("공격력: " + Atk + " ");
             Console.WriteLine("체력: " + Hp);
         }
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }
+
 
 
