@@ -150,6 +150,9 @@ namespace Dungeon_Adventure
             Console.Clear();
             Program.ShowHighlightText("Battle!");
 
+            Battle battle = new Battle();
+            battle.StartBattle(GameData.player);
+
             for (int i = 0; i < Monster.MonsterCnt; i++)
             {                
                 GameData.monsters[i].PrintMonsterDescription();

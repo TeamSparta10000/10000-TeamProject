@@ -12,6 +12,12 @@ namespace Dungeon_Adventure
     {
         public void StartBattle(Character player)
         {
+            Console.WriteLine($"야생의 몬스터 {monsterNo} 기가 나타났다!");
+            Console.Write($"등장한 몬스터: ");
+            for (int i = 0; i < monsters.Length; i++)
+            {
+                Console.Write($"{monsters[i]}  ");
+            }
             Monster[] monsters = MonsterGroup();
             Console.WriteLine("플레이어의 턴을 시작합니다!");
             // 플레이어 턴 종료시 적이 공격하는 로직을 구현 >> 캐릭터/몬스터에게 '대미지를 받는' 메서드가 아니라 '대미지를 주는' 메서드를 추가.
@@ -73,12 +79,6 @@ namespace Dungeon_Adventure
                 }
             }
             return monsters;
-            Console.WriteLine($"야생의 몬스터 {monsterNo} 기가 나타났다!");
-            Console.Write($"등장한 몬스터: ");
-            for (int i = 0; i < monsters.Length; i++)
-            {
-                Console.Write($"{monsters[i]}  ");
-            }
         }
     }
 }
