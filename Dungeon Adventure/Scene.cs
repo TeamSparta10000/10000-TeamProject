@@ -15,6 +15,7 @@ namespace Dungeon_Adventure
 
         public static void DisplayGameStart()
         {
+            Console.Clear();
             Console.WriteLine(" ________      ___  ___      ________      _______       ________      ________      ________           ________      ________      ___      ___  _______       ________       _________    ___  ___      ________      _______      ");
             Console.WriteLine("|\\   ___ \\    |\\  \\|\\  \\    |\\   ____\\    |\\  ___ \\     |\\   __  \\    |\\   __  \\    |\\   ___  \\        |\\   __  \\    |\\   ___ \\    |\\  \\    /  /||\\  ___ \\     |\\   ___  \\    |\\___   ___\\ |\\  \\|\\  \\    |\\   __  \\    |\\  ___ \\     ");
             Console.WriteLine("\\ \\  \\_|\\ \\   \\ \\  \\\\\\  \\   \\ \\  \\___|    \\ \\   __/|    \\ \\  \\|\\  \\   \\ \\  \\|\\  \\   \\ \\  \\\\ \\  \\       \\ \\  \\|\\  \\   \\ \\  \\_|\\ \\   \\ \\  \\  /  / /\\ \\   __/|    \\ \\  \\\\ \\  \\   \\|___ \\  \\_| \\ \\  \\\\\\  \\   \\ \\  \\|\\  \\   \\ \\   __/|    ");
@@ -156,7 +157,11 @@ namespace Dungeon_Adventure
             {
                 int monsterIdx = random.Next(0, GameData.monsters.Length);
                 Monster monsterData = GameData.monsters[monsterIdx];
+<<<<<<< HEAD
                 monsterList.Add(monsterData.Clone() as Monster);
+=======
+                monsterList.Add(monsterData);
+>>>>>>> 81c70109abd327728bea47962d6afd2d6094f1f3
             }
         }
         private static void RandomMonsterCount(bool withNumber = false)
@@ -203,7 +208,11 @@ namespace Dungeon_Adventure
         public static int MonsterAtkDamage(int i) // 마찬가지의 이유로 GameDate.cs에 생성항. 
         {
             double MinDamage = monsterList[i].Atk - Math.Ceiling((double)monsterList[i].Atk / 10);
+<<<<<<< HEAD
             double MaxDamage = monsterList[i].Atk + Math.Ceiling((double)monsterList[i].Atk / 10);
+=======
+            double MaxDamage = monsterList[i].Atk + Math.Ceiling((double)GameData.monsters[i].Atk / 10);
+>>>>>>> 81c70109abd327728bea47962d6afd2d6094f1f3
             int atkDamage = new Random().Next((int)MinDamage, (int)MaxDamage + 1);
             return atkDamage;
         }
@@ -322,12 +331,28 @@ namespace Dungeon_Adventure
             Console.WriteLine();
             Console.WriteLine("몬스터가 공격합니다. ");
             Console.WriteLine();
+<<<<<<< HEAD
 
             int idx = 0;
 
             for (int i = 0; i < monsterCnt; i++)
             {
                 PlayerTakeDamage(MonsterAtkDamage(i), i);
+=======
+            for (int i = 0; i < Monster.MonsterCnt; i++)
+            {
+                if (GameData.monsters[i].Hp > 0)
+                {
+                    PlayerTakeDamage(MonsterAtkDamage(i), i);
+                    if (GameData.player.Hp <= 0)
+                    {
+                        Console.WriteLine("\n아무 키 입력 시 전투 결과창으로 넘어갑니다. ");
+                        Console.ReadKey();
+
+                        GameOver();
+                    }
+                }
+>>>>>>> 81c70109abd327728bea47962d6afd2d6094f1f3
             }
 
             Console.WriteLine("\n아무 키 입력 시 다음 턴으로 넘어갑니다. ");
