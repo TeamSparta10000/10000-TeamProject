@@ -14,11 +14,6 @@ namespace Dungeon_Adventure
         {
             GameData.items[idx].IsEquipped = !GameData.items[idx].IsEquipped;
         }
-        public static void MonsterDead(int i)
-        {
-            GameData.monsters[i].IsDead = !GameData.monsters[i].IsDead;
-        }
-
         public static void ShowHighlightText(string text)
         {
             Console.ForegroundColor = ConsoleColor.Magenta;

@@ -16,11 +16,7 @@ namespace Dungeon_Adventure
         public static Item[] items;
         public static void GameDataSetting()
         {
-<<<<<<< HEAD
-            player = new Character("Frost", "마법사", 1, 20, 5, 100, 200, 5000);
-=======
-            player = new Character("Frost", "마법사", 1, 20, 5, 15, 200, 5000);
->>>>>>> 81c70109abd327728bea47962d6afd2d6094f1f3
+            player = new Character("Frost", "마법사", 1, 100, 5, 100, 50, 5000);
             items = new Item[10];            
             AddItem(new Item("초급 마법사의 로브", "마법학교에서 지급하는 로브다.", 0, 0, 5, 0, 50));
             AddItem(new Item("초급 마법사의 스태프", "마법학교에서 지급하는 스태프다.", 1, 10, 0, 0, 50));
@@ -33,14 +29,6 @@ namespace Dungeon_Adventure
             };
         }
         
-        
-        
-        //public static void MonsterList(Monster monster)
-        //{
-        //    if (Monster.MonsterCnt == 10) return;
-        //    monsters[Monster.MonsterCnt] = monster;
-        //    Monster.MonsterCnt++;
-        //}
         public static void AddItem(Item item)
         {
             if (Item.ItemCnt == 10) return;
