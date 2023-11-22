@@ -175,6 +175,7 @@ namespace Dungeon_Adventure
         public static void PlayerAtkScene()
         {
             Console.Clear();
+            Program.ShowHighlightText("Battle!");
 
             for (int i = 0; i < Monster.MonsterCnt; i++)
             {
@@ -207,6 +208,7 @@ namespace Dungeon_Adventure
         public static void MonsterAtkScene()
         {
             Console.Clear();
+            Program.ShowHighlightText("Battle!");
 
             for (int i = 0; i < Monster.MonsterCnt; i++)
             {
