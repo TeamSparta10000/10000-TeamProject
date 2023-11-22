@@ -34,7 +34,8 @@ namespace Dungeon_Adventure
             Console.WriteLine(s3);
         }
         public static int CheckValidInput(int min, int max)
-        {
+        {            
+            Console.WriteLine();
             while (true)
             {
                 string input = Console.ReadLine();
